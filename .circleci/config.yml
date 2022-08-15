@@ -16,12 +16,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo world
-  print_environment:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo $MY_NAME
-
+      - run: # print the name of the branch we're on
+          name: "My Name is ?"
+          command: echo ${MY_NAME}
 
 workflows:
   # Name the workflow "welcome"
@@ -29,7 +26,6 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
-      - print_environment
       - print_hello
       - print_world:
           requires:
